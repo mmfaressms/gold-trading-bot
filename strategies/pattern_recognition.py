@@ -103,6 +103,7 @@ class PatternRecognitionStrategy:
         
         triangle_type, tri_confidence = self.detect_triangle(prices)
         if triangle_type != 'NONE':
+            # المثلث في حالة تقارب - قد يحدث اختراق
             signal = 'WAIT'
             confidence = tri_confidence
             pattern = triangle_type

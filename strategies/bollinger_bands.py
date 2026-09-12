@@ -45,12 +45,12 @@ class BollingerBandsStrategy:
         middle = middle_band.iloc[-1]
         
         # السعر قريب من الحد الأسفل - إشارة شراء
-        if current_price <= lower * 1.02:
+        if current_price <= lower * 1.02:  # ضمن 2% من الحد الأسفل
             confidence = 1 - ((current_price - lower) / (middle - lower))
             return {'signal': 'BUY', 'confidence': max(min(confidence, 1.0), 0.5)}
         
         # السعر قريب من الحد الأعلى - إشارة بيع
-        elif current_price >= upper * 0.98:
+        elif current_price >= upper * 0.98:  # ضمن 2% من الحد الأعلى
             confidence = 1 - ((upper - current_price) / (upper - middle))
             return {'signal': 'SELL', 'confidence': max(min(confidence, 1.0), 0.5)}
         
