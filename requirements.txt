@@ -1,0 +1,68 @@
+# Core Dependencies
+python-dotenv==1.0.0
+requests==2.31.0
+pandas==2.0.3
+numpy==1.24.3
+
+# MetaTrader 5
+MetaTrader5==5.0.45
+
+# Web Framework & Dashboard
+Flask==3.0.0
+Flask-SQLAlchemy==3.1.1
+Flask-CORS==4.0.0
+Flask-RESTful==0.3.10
+Werkzeug==3.0.0
+
+# Data Analysis & Machine Learning
+scikit-learn==1.3.0
+scipy==1.11.2
+statsmodels==0.14.0
+ta==0.10.2
+
+# Visualization
+matplotlib==3.7.2
+plotly==5.16.1
+seaborn==0.12.2
+
+# Database
+SQLAlchemy==2.0.20
+psycopg2-binary==2.9.6
+
+# API & Web Scraping
+beautifulsoup4==4.12.2
+lxml==4.9.2
+aiohttp==3.8.5
+
+# Notifications
+python-telegram-bot==20.0
+email-validator==2.0.0
+
+# Time Series Analysis
+prophet==1.1.5
+arch==5.3.0
+
+# Configuration
+pyyaml==6.0.1
+
+# Logging & Monitoring
+python-logging-loki==0.3.2
+
+# Testing
+pytest==7.4.0
+pytest-cov==4.1.0
+pytest-asyncio==0.21.1
+
+# Code Quality
+black==23.7.0
+flake8==6.0.0
+pylint==2.17.5
+
+# Performance
+cython==0.29.36
+numba==0.57.0
+
+# Utilities
+tqdm==4.65.0
+colorama==0.4.6
+click==8.1.6
