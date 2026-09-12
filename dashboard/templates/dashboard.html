@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 Gold Trading Bot - لوحة التحكم</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <i class="fas fa-crown"></i>
+                <span>Gold Trading Bot</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" class="active">لوحة التحكم</a></li>
+                <li><a href="#">الصفقات</a></li>
+                <li><a href="#">الإحصائيات</a></li>
+                <li><a href="#">الإعدادات</a></li>
+            </ul>
+            <div class="status-badge" id="statusBadge">
+                <span class="status-dot"></span>
+                <span id="statusText">غير متصل</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>التحكم</h3>
+                <button class="btn btn-primary btn-full" id="startBtn">
+                    <i class="fas fa-play"></i> ابدأ التداول
+                </button>
+                <button class="btn btn-danger btn-full" id="stopBtn" disabled>
+                    <i class="fas fa-stop"></i> أوقف التداول
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>الإحصائيات السريعة</h3>
+                <div class="stat-box">
+                    <label>الرصيد:</label>
+                    <p class="stat-value" id="balance">$10,000.00</p>
+                </div>
+                <div class="stat-box">
+                    <label>الإيكويتي:</label>
+                    <p class="stat-value" id="equity">$10,500.00</p>
+                </div>
+                <div class="stat-box">
+                    <label>الربح/الخسارة:</label>
+                    <p class="stat-value profit" id="profit">+$500.00</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Header -->
+            <div class="header">
+                <h1>📊 لوحة تحكم برنامج تداول الذهب</h1>
+                <p class="timestamp" id="timestamp"></p>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-row">
+                <!-- Price Chart -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> سعر الذهب</h3>
+                        <span class="price" id="currentPrice">$2,050.00</span>
+                    </div>
+                    <canvas id="priceChart"></canvas>
+                </div>
+
+                <!-- Equity Curve -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-area"></i> منحنى الإيكويتي</h3>
+                    </div>
+                    <canvas id="equityChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Strategies Status -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-robot"></i> حالة الاستراتيجيات</h3>
+                </div>
+                <div class="strategies-grid">
+                    <div class="strategy-card">
+                        <h4>Moving Average (MA)</h4>
+                        <div class="signal buy">إشارة شراء</div>
+                        <p>الثقة: 78%</p>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>RSI</h4>
+                        <div class="signal hold">انتظار</div>
+                        <p>الثقة: 45%</p>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>MACD</h4>
+                        <div class="signal buy">إشارة شراء</div>
+                        <p>الثقة: 82%</p>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>Bollinger Bands</h4>
+                        <div class="signal sell">إشارة بيع</div>
+                        <p>الثقة: 65%</p>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>Stochastic</h4>
+                        <div class="signal hold">انتظار</div>
+                        <p>الثقة: 52%</p>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>Pattern Recognition</h4>
+                        <div class="signal hold">انتظار</div>
+                        <p>الثقة: 35%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Open Positions -->
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-list"></i> الصفقات المفتوحة</h3>
+                    <span class="badge" id="positionsCount">3</span>
+                </div>
+                <div class="table-responsive">
+                    <table class="trades-table">
+                        <thead>
+                            <tr>
+                                <th>الرقم</th>
+                                <th>النوع</th>
+                                <th>الحجم</th>
+                                <th>سعر الدخول</th>
+                                <th>السعر الحالي</th>
+                                <th>الربح/الخسارة</th>
+                                <th>الإجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tradesTableBody">
+                            <tr>
+                                <td>#12345</td>
+                                <td><span class="badge buy-badge">شراء</span></td>
+                                <td>0.1</td>
+                                <td>$2,045.50</td>
+                                <td>$2,050.00</td>
+                                <td class="profit">+$45.00</td>
+                                <td><button class="btn btn-sm btn-danger">إغلاق</button></td>
+                            </tr>
+                            <tr>
+                                <td>#12344</td>
+                                <td><span class="badge sell-badge">بيع</span></td>
+                                <td>0.15</td>
+                                <td>$2,055.00</td>
+                                <td>$2,050.00</td>
+                                <td class="profit">+$75.00</td>
+                                <td><button class="btn btn-sm btn-danger">إغلاق</button></td>
+                            </tr>
+                            <tr>
+                                <td>#12343</td>
+                                <td><span class="badge buy-badge">شراء</span></td>
+                                <td>0.05</td>
+                                <td>$2,048.00</td>
+                                <td>$2,050.00</td>
+                                <td class="profit">+$10.00</td>
+                                <td><button class="btn btn-sm btn-danger">إغلاق</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <h3>إجمالي الصفقات</h3>
+                    <p class="big-number">124</p>
+                    <span class="subtitle">صفقة تاريخية</span>
+                </div>
+                <div class="stat-card">
+                    <h3>معدل الفوز</h3>
+                    <p class="big-number">68.5%</p>
+                    <span class="subtitle">صفقات رابحة</span>
+                </div>
+                <div class="stat-card">
+                    <h3>الربح الإجمالي</h3>
+                    <p class="big-number profit">+$2,450.00</p>
+                    <span class="subtitle">هذا الشهر</span>
+                </div>
+                <div class="stat-card">
+                    <h3>نسبة المخاطرة</h3>
+                    <p class="big-number">2.5:1</p>
+                    <span class="subtitle">نسبة الربح للخسارة</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>🏆 Gold Trading Bot - برنامج تداول ذهب احترافي | جميع الحقوق محفوظة © 2024</p>
+        <p>⚠️ تحذير: التداول ينطوي على مخاطر عالية. استخدم حساب تجريبي أولاً!</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
